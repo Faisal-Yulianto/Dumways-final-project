@@ -1,0 +1,64 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+    <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />    
+    <link rel="shortcut icon" href="/assets/image/dumbways.png" type="image/x-icon"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"            rel="stylesheet"integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"/>
+    
+    <style>
+        .card-body {
+            list-style: none;
+        }
+    
+    </style>
+    <title>My website</title>
+  </head>
+  <body>
+    <div class="container-project bg-dark">
+        <div class="header d-flex align-items-center justify-content-around">
+            <h1 class="text-center p-5 text-light bg-dark">Provinsi dan kabupaten</h1>
+        <div class="button-group col-4 text-end">
+            <a href="/Provinsi/add"class="btn btn-primary m-1 col-3">Add Provinsi</a>
+            <a href="/kabupaten/add"class="btn btn-primary m-1 col-3">Add Kabupaten</a>
+        </div>
+        {{#if success_msg}}
+            <p>{{success_msg}}</p>
+        {{/if}}
+        {{#if error_msg}}
+            <p>{{error_msg}}</p>
+        {{/if}}
+    </div>
+      <div class="my-project d-flex justify-content-center flex-wrap mt-5">
+        {{#each provinsi}}
+          <div class="card m-2 p-3 " style="width: 30rem; max-height : 750px">
+            <a href="/provinsi/{{this.id}}"><img src="../assets/uploads/{{this.photo}}" class="card-img-top p-2"  style="height: 450px;" />
+            </a>
+            <div class="card-body  text-center" style="height: 380px;">
+              <h5 class="card-title">{{this.nama}}</h5>
+              <p>{{this.diresmikan}}
+                <div class="kabupaten overflow-auto" style="height: 140px;">
+                    <p>Kabupaten besar : {{#each this.kabupaten}}
+                    <li>{{this.nama}} - {{this.diresmikan}}</li>
+                    {{/each}}</p>
+                </div>
+                <div class="btn-group d-flex">
+                    <a href="/provinsi/edit/{{id}}" class="btn btn-dark m-1 rounded" style="width: 200px; height : 39px">Edit</a>
+                    <form action="/provinsi/delete/{{id}}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus provinsi ini?')">
+                <button type="submit" class="btn btn-dark m-1" style="width: 200px;">Delete</button>
+                     </form>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+      </div>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
+
